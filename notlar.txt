@@ -1,0 +1,20 @@
+ try {
+            // Mevcut dosyadan bilgileri okuyarak musteriler listesine aktar
+
+            Map<Integer, isPojo> isler = Main.isler;
+
+            // musteriler listesinden ilgili müşteriyi sil
+            isler.remove(id);
+            String filePath = System.getProperty("user.dir") + "/isler.txt";
+            File file = new File(filePath);
+            // Dosyayı yeniden yaz
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (isPojo is : isler.values()) {
+                    String line = is.getId() + "//" + is.getmId() +
+                            "//" + is.getIsTuru() + "//" + is.getAciklama() + "//" + is.getTutar() + "// " +is.getTahsilat();
+                    writer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Dosyadan silme hatası: " + e.getMessage());
+        }
